@@ -12,6 +12,10 @@
     />
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    ></script>
     <title>Jaco's Weather Report</title>
   </head>
   <body>
@@ -36,7 +40,9 @@
           class="col-lg-8 container border border-secondary rounded"
         ></section>
         <aside id="savedCities" class="col-lg-4 container"></aside>
-        <section id="forecastDisplay" class="col-lg-8 container"></section>
+        <section class="col-lg-8 container">
+          <div id="forecastDisplay" class="row"></div>
+        </section>
       </div>
     </main>
 

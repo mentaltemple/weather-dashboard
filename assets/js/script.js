@@ -9,15 +9,15 @@ for (var i = 0; i < localStorage.length; i++) {
   var savedCityList = localStorage.getItem(localStorage.key(i));
 
   console.log(savedCityList);
-}
 
-var savedContainer = $("#savedCities");
-var savedCityBut = $("<button>");
-savedCityBut
-  .text(savedCityList)
-  .addClass("btn btn-secondary col-12 mt-3")
-  .attr("id", "searchCity");
-savedContainer.append(savedCityBut);
+  var savedContainer = $("#savedCities");
+  var savedCityBut = $("<button>");
+  savedCityBut
+    .text(savedCityList)
+    .addClass("btn btn-secondary col-12 mt-3")
+    .attr("id", "searchCity");
+  savedContainer.append(savedCityBut);
+}
 
 //-----------------SAVED BUTTON--------------------
 
@@ -153,38 +153,41 @@ $("#searchBtn").on("click", function () {
 
       //store relevant data in variables for 5day
       //   var cityName = dailySliced[i].name; pull from above**
+
       for (var i = 0; i < dailySliced.length; i++) {
-        var tempData = dailySliced[i].temp.max;
-        var windData = dailySliced[i].wind_speed;
-        var humData = dailySliced[i].humidity;
+        var dateDataFive = moment.unix(dailySliced[i].dt).format("l");
+        var tempDataFive = dailySliced[i].temp.max;
+        var windDataFive = dailySliced[i].wind_speed;
+        var humDataFive = dailySliced[i].humidity;
+        var forecast = $("#forecastDisplay");
+
+        //display date
+        var dateShowFive = $("<h1>");
+        dateShowFive.text(dateDataFive).addClass("h1");
+        forecast.append(dateShowFive);
+
+        //display temp
+        var tempShowFive = $("<h3>");
+        tempShowFive.text("Temp: " + tempDataFive + " °F").addClass("h3 clear");
+        forecast.append(tempShowFive);
+
+        //display wind
+        var windShowFive = $("<h3>");
+        windShowFive
+          .text("Wind: " + windDataFive + " MPH")
+          .addClass("h3 clear");
+        forecast.append(windShowFive);
+
+        //display humidity
+        var humShowFive = $("<h3>");
+        humShowFive.text("Humidity: " + humDataFive + "%").addClass("h3 clear");
+        forecast.append(humShowFive);
       }
 
       console.log(tempData);
       //display current weather data with dynamically generated elements
 
-      //display city name
-      //   var current = $("#currentDisplay");
-      //   var cityShow = $("<h1>");
-      //   cityShow.text(cityName).addClass("h1");
-      //   current.append(cityShow);
-
-      //   //display temp
-      //   var tempShow = $("<h3>");
-      //   tempShow.text("Temp: " + tempData + " °F").addClass("h3 clear");
-      //   current.append(tempShow);
-
-      //   //display wind
-      //   var windShow = $("<h3>");
-      //   windShow.text("Wind: " + windData + " MPH").addClass("h3 clear");
-      //   current.append(windShow);
-
-      //   //display humidity
-      //   var humShow = $("<h3>");
-      //   humShow.text("Humidity: " + humData + "%").addClass("h3 clear");
-      //   current.append(humShow);
-
       //----------------------
-      var forecast = $("#forecastDisplay");
     });
   });
 });
