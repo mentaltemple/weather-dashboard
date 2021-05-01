@@ -12,9 +12,31 @@
     />
     <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Document</title>
+    <title>Jaco's Weather Report</title>
   </head>
   <body>
+    <!-- create header -->
+    <header class="container col-12">
+      <h1 class="row h1 justify-content-center p-3">Weather Dashboard</h1>
+    </header>
+    <main class="container">
+      <div class="row">
+        <aside class="col-lg-4 border-bottom">
+          <!-- header -->
+          <h2 class="h2">Search for a city:</h2>
+          <!-- text input -->
+          <input type="text" class="form-control mb-3" />
+          <!-- button -->
+          <button id="searchBtn" class="btn btn-success col-12 mb-3">
+            Search
+          </button>
+        </aside>
+        <section class="col-lg-8">Current Weather</section>
+        <aside class="col-lg-4">Saved Cities</aside>
+        <section class="col-lg-8">5 Day forecast</section>
+      </div>
+    </main>
+
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
