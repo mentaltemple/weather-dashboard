@@ -54,6 +54,8 @@ for (var i = 0; i < localStorage.length; i++) {
 $("#searchBtn").on("click", function () {
   var cityInput = $("#citySearch").val();
 
+  //display current weather section
+
   //clear input field
   $("#citySearch").val("");
 
@@ -161,27 +163,33 @@ $("#searchBtn").on("click", function () {
         var humDataFive = dailySliced[i].humidity;
         var forecast = $("#forecastDisplay");
 
+        //create card to nest below items inside of
+        var fiveDayCard = $("<div>").addClass(
+          "card bg-dark rounded border-info text-white m-2 p-3"
+        );
+        forecast.append(fiveDayCard);
+
         //display date
         var dateShowFive = $("<h1>");
-        dateShowFive.text(dateDataFive).addClass("h1");
-        forecast.append(dateShowFive);
+        dateShowFive.text(dateDataFive).addClass("h2");
+        fiveDayCard.append(dateShowFive);
 
         //display temp
         var tempShowFive = $("<h3>");
-        tempShowFive.text("Temp: " + tempDataFive + " °F").addClass("h3 clear");
-        forecast.append(tempShowFive);
+        tempShowFive.text("Temp: " + tempDataFive + " °F").addClass("h4 clear");
+        fiveDayCard.append(tempShowFive);
 
         //display wind
         var windShowFive = $("<h3>");
         windShowFive
           .text("Wind: " + windDataFive + " MPH")
-          .addClass("h3 clear");
-        forecast.append(windShowFive);
+          .addClass("h4 clear");
+        fiveDayCard.append(windShowFive);
 
         //display humidity
         var humShowFive = $("<h3>");
-        humShowFive.text("Humidity: " + humDataFive + "%").addClass("h3 clear");
-        forecast.append(humShowFive);
+        humShowFive.text("Humidity: " + humDataFive + "%").addClass("h4 clear");
+        fiveDayCard.append(humShowFive);
       }
 
       console.log(tempData);
