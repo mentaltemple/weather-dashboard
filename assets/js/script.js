@@ -4,6 +4,21 @@
 
 //EVENT HANDLERS
 
+//display the saved city searches in buttons upon page load
+for (var i = 0; i < localStorage.length; i++) {
+  var savedCityList = localStorage.getItem(localStorage.key(i));
+
+  console.log(savedCityList);
+}
+
+var savedContainer = $("#savedCities");
+var savedCityBut = $("<button>");
+savedCityBut
+  .text(savedCityList)
+  .addClass("btn btn-secondary col-12 mt-3")
+  .attr("id", "searchCity");
+savedContainer.append(savedCityBut);
+
 //listen for click from search button
 $("#searchBtn").on("click", function () {
   var cityInput = $("#citySearch").val();
@@ -11,20 +26,18 @@ $("#searchBtn").on("click", function () {
   //clear input field
   $("#citySearch").val("");
 
-  //save city to local storage
-  localStorage.setItem(cityInput, cityInput);
-
-  //display the saved city search
-
   //clear previously called data
   $("#currentDisplay").empty();
   $("#forecastDisplay").empty();
 
-  //**need to connect to local storage for saving and retrieval**
+  //save city to local storage and create a button with saved city name
+  localStorage.setItem(cityInput, cityInput);
+  var savedCity = localStorage.getItem(cityInput);
   var savedContainer = $("#savedCities");
-  var savedCity = $("<button>");
-  savedCity.text(cityInput).addClass("btn btn-secondary col-12 mt-3");
-  savedContainer.append(savedCity);
+  var savedCityBut = $("<button>");
+  savedCityBut.text(savedCity).addClass("btn btn-secondary col-12 mt-3");
+  // .setAttr();
+  savedContainer.append(savedCityBut);
 
   //create a variable that combines api url with city + key
   var weatherKey = "5255530bf1f1204d64609824d51b20e5";
