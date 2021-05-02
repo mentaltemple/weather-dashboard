@@ -23,17 +23,19 @@
     <header class="container col-12">
       <h1 class="row h1 justify-content-center p-3">Weather Dashboard</h1>
     </header>
-    <main class="container col-lg-12">
+    <main class="container col-lg-10">
       <div class="row">
-        <aside class="col-lg-3 border-bottom">
+        <aside id="search" class="col-lg-3">
           <!-- header -->
           <h2 class="h2">Search for a city:</h2>
           <!-- text input -->
           <input id="citySearch" type="text" class="form-control mb-3" />
           <!-- button -->
-          <button id="searchBtn" class="btn btn-success col-12 mb-3">
-            Search
-          </button>
+          <div class="border-bottom border-secondary mb-3">
+            <button id="searchBtn" class="btn btn-success col-12 mb-3">
+              Search
+            </button>
+          </div>
         </aside>
         <section
           id="currentDisplay"

@@ -10,11 +10,11 @@ for (var i = 0; i < localStorage.length; i++) {
 
   console.log(savedCityList);
 
-  var savedContainer = $("#savedCities");
+  var savedContainer = $("#search");
   var savedCityBut = $("<button>");
   savedCityBut
     .text(savedCityList)
-    .addClass("btn btn-secondary col-12 mt-3")
+    .addClass("btn btn-secondary col-12 mb-3")
     .attr("id", "searchCity");
   savedContainer.append(savedCityBut);
 }
@@ -66,11 +66,11 @@ $("#searchBtn").on("click", function () {
   //save city to local storage and create a button with saved city name
   localStorage.setItem(cityInput, cityInput);
   var savedCity = localStorage.getItem(cityInput);
-  var savedContainer = $("#savedCities");
+  var savedContainer = $("#search");
   var savedCityBut = $("<button>");
   savedCityBut
     .text(savedCity)
-    .addClass("btn btn-secondary col-12 mt-3")
+    .addClass("btn btn-secondary col-12 mb-3")
     .attr("id", "searchCity");
   // .setAttr();
   savedContainer.append(savedCityBut);
@@ -88,8 +88,12 @@ $("#searchBtn").on("click", function () {
     url: requestUrl,
     method: "GET",
   }).then(function (response) {
+    console.log(response);
     //parse the object to glean current weather and location data
     var cityName = response.name;
+    var dateData = moment().format("l");
+    //show weather icon
+    var iconData = response.weather[0].icon;
     var tempData = response.main.temp;
     var windData = response.wind.speed;
     var humData = response.main.humidity;
@@ -103,6 +107,18 @@ $("#searchBtn").on("click", function () {
     var cityShow = $("<h1>");
     cityShow.text(cityName).addClass("h1");
     current.append(cityShow);
+
+    //display date
+    var dateShow = $("<h1>");
+    dateShow.text(dateData).addClass("h1");
+    current.append(dateShow);
+
+    //display icon
+    var iconShow = $("<img>");
+    iconShow
+      .attr("src", "http://openweathermap.org/img/wn/" + iconData + "@2x.png")
+      .addClass("");
+    current.append(iconShow);
 
     //display temp
     var tempShow = $("<h3>");
@@ -158,10 +174,13 @@ $("#searchBtn").on("click", function () {
 
       for (var i = 0; i < dailySliced.length; i++) {
         var dateDataFive = moment.unix(dailySliced[i].dt).format("l");
+        var iconDataFive = dailySliced[i].weather[0].icon;
         var tempDataFive = dailySliced[i].temp.max;
         var windDataFive = dailySliced[i].wind_speed;
         var humDataFive = dailySliced[i].humidity;
         var forecast = $("#forecastDisplay");
+
+        console.log(iconDataFive);
 
         //create card to nest below items inside of
         var fiveDayCard = $("<div>").addClass(
@@ -173,6 +192,15 @@ $("#searchBtn").on("click", function () {
         var dateShowFive = $("<h1>");
         dateShowFive.text(dateDataFive).addClass("h2");
         fiveDayCard.append(dateShowFive);
+
+        //display icon
+        var iconShowFive = $("<img>");
+        iconShowFive.attr(
+          "src",
+          "http://openweathermap.org/img/wn/" + iconDataFive + "@2x.png"
+        );
+        // .addClass("h-25 w-25");
+        fiveDayCard.append(iconShowFive);
 
         //display temp
         var tempShowFive = $("<h3>");
