@@ -15,38 +15,173 @@ for (var i = 0; i < localStorage.length; i++) {
   savedCityBut
     .text(savedCityList)
     .addClass("btn btn-secondary col-12 mb-3")
-    .attr("id", "searchCity");
+    .attr("id", "searchCityBtn");
   savedContainer.append(savedCityBut);
 }
 
 //-----------------SAVED BUTTON--------------------
 
-//click listener event from previously saved cities
-// $("#searchCity").on("click", function () {
-//   //clear input field
-//   $("#citySearch").val("");
+// click listener event on buttons from previously saved cities
+$("#searchCityBtn").on("click", function () {
+  //clear input field
+  $("#citySearch").val("");
 
-//   //clear displayed data
-//   $("#currentDisplay").empty();
-//   $("#forecastDisplay").empty();
+  //clear displayed data
+  $("#currentDisplay").empty();
+  $("#forecastDisplay").empty();
 
-//   var weatherKey = "5255530bf1f1204d64609824d51b20e5";
-//   var requestUrl = [
-//     "https://api.openweathermap.org/data/2.5/weather?q=" +
-//       savedCityName +
-//       "&units=imperial&appid=" +
-//       weatherKey,
-//   ];
+  var savedCityName = $(this).text();
+  console.log(savedCityName);
 
-//   console.log(savedCityName);
+  var weatherKey = "5255530bf1f1204d64609824d51b20e5";
+  var requestUrl = [
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+      savedCityName +
+      "&units=imperial&appid=" +
+      weatherKey,
+  ];
 
-//   $.ajax({
-//     url: requestUrl,
-//     method: "GET",
-//   }).then(function (response2) {
-//     console.log(response2);
-//   });
-// });
+  $.ajax({
+    url: requestUrl,
+    method: "GET",
+  }).then(function (response2) {
+    var cityName = response2.name;
+    var dateData = moment().format("l");
+    //show weather icon
+    var iconData = response2.weather[0].icon;
+    var tempData = response2.main.temp;
+    var windData = response2.wind.speed;
+    var humData = response2.main.humidity;
+    var lon = response2.coord.lon;
+    var lat = response2.coord.lat;
+
+    //display city name
+    var current = $("#currentDisplay");
+    var cityShow = $("<h1>");
+    cityShow.text(cityName).addClass("h1");
+    current.append(cityShow);
+
+    //display date
+    var dateShow = $("<h1>");
+    dateShow.text(dateData).addClass("h1");
+    current.append(dateShow);
+
+    //display icon
+    var iconShow = $("<img>");
+    iconShow
+      .attr("src", "http://openweathermap.org/img/wn/" + iconData + "@2x.png")
+      .addClass("");
+    current.append(iconShow);
+
+    //display temp
+    var tempShow = $("<h3>");
+    tempShow.text("Temp: " + tempData + " °F").addClass("h3 clear");
+    current.append(tempShow);
+
+    //display wind
+    var windShow = $("<h3>");
+    windShow.text("Wind: " + windData + " MPH").addClass("h3 clear");
+    current.append(windShow);
+
+    //display humidity
+    var humShow = $("<h3>");
+    humShow.text("Humidity: " + humData + "%").addClass("h3 clear");
+    current.append(humShow);
+
+    console.log(response2);
+
+    //create a variable that combines 5day api url with city + key
+    var requestUrlOneCall = [
+      "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        lat +
+        "&lon=" +
+        lon +
+        "&exclude=current,minutely,hourly,alerts&units=imperial&appid=" +
+        weatherKey,
+    ];
+    //fetch the 5 day forecast and current uvi data
+    $.ajax({
+      url: requestUrlOneCall,
+      method: "GET",
+    }).then(function (responseOneCall) {
+      console.log(responseOneCall);
+      //-----------------------UVI------------------
+      //parse uvi value
+      var uviData = responseOneCall.daily[0].uvi;
+
+      var uviShow = $("<h3>");
+      uviShow.text("UV Index: " + uviData).addClass("h3");
+      current.append(uviShow);
+
+      //if else (uvi < 2) = favorable \\ 3-5 yellow// 6,7 orange \\ 8-10 red \\ 11+ purple
+
+      //------------------5 day---------------------
+      var daily = responseOneCall.daily;
+
+      dailySliced = daily.slice(1, 6);
+
+      console.log(dailySliced);
+
+      //store relevant data in variables for 5day
+      //   var cityName = dailySliced[i].name; pull from above**
+
+      for (var i = 0; i < dailySliced.length; i++) {
+        var dateDataFive = moment.unix(dailySliced[i].dt).format("l");
+        var iconDataFive = dailySliced[i].weather[0].icon;
+        var tempDataFive = dailySliced[i].temp.max;
+        var windDataFive = dailySliced[i].wind_speed;
+        var humDataFive = dailySliced[i].humidity;
+        var forecast = $("#forecastDisplay");
+
+        console.log(iconDataFive);
+
+        //create card to nest below items inside of
+        var fiveDayCard = $("<div>").addClass(
+          "card bg-dark rounded border-info text-white m-2 p-3"
+        );
+        forecast.append(fiveDayCard);
+
+        //display date
+        var dateShowFive = $("<h1>");
+        dateShowFive.text(dateDataFive).addClass("h2");
+        fiveDayCard.append(dateShowFive);
+
+        //display icon
+        var iconShowFive = $("<img>");
+        iconShowFive
+          .attr(
+            "src",
+            "http://openweathermap.org/img/wn/" + iconDataFive + "@2x.png"
+          )
+          .attr("height", "100px")
+          .attr("width", "100px");
+        fiveDayCard.append(iconShowFive);
+
+        //display temp
+        var tempShowFive = $("<h3>");
+        tempShowFive.text("Temp: " + tempDataFive + " °F").addClass("h4 clear");
+        fiveDayCard.append(tempShowFive);
+
+        //display wind
+        var windShowFive = $("<h3>");
+        windShowFive
+          .text("Wind: " + windDataFive + " MPH")
+          .addClass("h4 clear");
+        fiveDayCard.append(windShowFive);
+
+        //display humidity
+        var humShowFive = $("<h3>");
+        humShowFive.text("Humidity: " + humDataFive + "%").addClass("h4 clear");
+        fiveDayCard.append(humShowFive);
+      }
+
+      console.log(tempData);
+      //display current weather data with dynamically generated elements
+
+      //----------------------
+    });
+  });
+});
 
 //----------------------SEARCH BUTTON----------------------------------
 
@@ -71,7 +206,7 @@ $("#searchBtn").on("click", function () {
   savedCityBut
     .text(savedCity)
     .addClass("btn btn-secondary col-12 mb-3")
-    .attr("id", "searchCity");
+    .attr("id", "searchCityBtn");
   // .setAttr();
   savedContainer.append(savedCityBut);
 
@@ -195,11 +330,13 @@ $("#searchBtn").on("click", function () {
 
         //display icon
         var iconShowFive = $("<img>");
-        iconShowFive.attr(
-          "src",
-          "http://openweathermap.org/img/wn/" + iconDataFive + "@2x.png"
-        );
-        // .addClass("h-25 w-25");
+        iconShowFive
+          .attr(
+            "src",
+            "http://openweathermap.org/img/wn/" + iconDataFive + "@2x.png"
+          )
+          .attr("height", "100px")
+          .attr("width", "100px");
         fiveDayCard.append(iconShowFive);
 
         //display temp
