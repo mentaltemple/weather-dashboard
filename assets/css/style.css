@@ -6,3 +6,11 @@ header {
   background-color: rgb(96, 187, 248);
   height: 5rem;
 }
+
+.bg-orange {
+  background-color: orange;
+}
+
+.fit-content {
+  width: fit-content;
+}

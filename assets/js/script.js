@@ -114,10 +114,23 @@ $(document).on("click", "#searchCityBtn", function () {
       var uviData = responseOneCall.daily[0].uvi;
 
       var uviShow = $("<h3>");
-      uviShow.text("UV Index: " + uviData).addClass("h3");
-      dayCard.append(uviShow);
+      uviShow
+        .text("UV Index: " + uviData)
+        .addClass("h3 border rounded text-white fit-content p-2");
 
-      //if else (uvi < 2) = favorable \\ 3-5 yellow// 6,7 orange \\ 8-10 red \\ 11+ purple
+      if (uviData <= 2) {
+        uviShow.addClass("bg-success");
+      } else if (uviData >= 3 && uviData < 6) {
+        uviShow.addClass("bg-warning");
+      } else if (uviData >= 6 && uviData < 8) {
+        uviShow.addClass("bg-orange");
+      } else if (uviData >= 8 && uviData < 11) {
+        uviShow.addClass("bg-danger");
+      } else if (uviData >= 11) {
+        uviShow.addClass("bg-purple");
+      }
+
+      dayCard.append(uviShow);
 
       //------------------5 DAY SAVED CITIES---------------------
       var daily = responseOneCall.daily;
@@ -310,14 +323,22 @@ $("#searchBtn").on("click", function () {
         var uviData = responseOneCall.daily[0].uvi;
 
         var uviShow = $("<h3>");
-        uviShow.text("UV Index: " + uviData).addClass("h3 border text-white");
+        uviShow
+          .text("UV Index: " + uviData)
+          .addClass("h3 border rounded text-white fit-content p-2");
 
-        // if (uviData <= 2) {
-        //   uviShow.addClass("bg-success");
-        // } else if (uviData > 2 || uviData < 6) {
-        //   uviShow.addClass("bg-warning");
-        // } else if (uviData >=6 || uviData <= 7 ) {
-        //   uviShow.addClass("bg-orange");
+        if (uviData <= 2) {
+          uviShow.addClass("bg-success");
+        } else if (uviData >= 3 && uviData < 6) {
+          uviShow.addClass("bg-warning");
+        } else if (uviData >= 6 && uviData < 8) {
+          uviShow.addClass("bg-orange");
+        } else if (uviData >= 8 && uviData < 11) {
+          uviShow.addClass("bg-danger");
+        } else if (uviData >= 11) {
+          uviShow.addClass("bg-purple");
+        }
+
         //if else uvi < 2 = favorable
         // 3-5 yellow
         // 6,7 orange
