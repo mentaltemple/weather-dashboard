@@ -137,7 +137,7 @@ $("#searchCityBtn").on("click", function () {
 
         //create card to nest below items inside of
         var fiveDayCard = $("<div>").addClass(
-          "card bg-dark rounded border-info text-white m-2 p-3"
+          "card bg-dark rounded border-info text-white m-2 p-3 col-lg-2"
         );
         forecast.append(fiveDayCard);
 
@@ -159,19 +159,19 @@ $("#searchCityBtn").on("click", function () {
 
         //display temp
         var tempShowFive = $("<h3>");
-        tempShowFive.text("Temp: " + tempDataFive + " °F").addClass("h4 clear");
+        tempShowFive.text("Temp: " + tempDataFive + " °F").addClass("h6 clear");
         fiveDayCard.append(tempShowFive);
 
         //display wind
         var windShowFive = $("<h3>");
         windShowFive
           .text("Wind: " + windDataFive + " MPH")
-          .addClass("h4 clear");
+          .addClass("h6 clear");
         fiveDayCard.append(windShowFive);
 
         //display humidity
         var humShowFive = $("<h3>");
-        humShowFive.text("Humidity: " + humDataFive + "%").addClass("h4 clear");
+        humShowFive.text("Humidity: " + humDataFive + "%").addClass("h6 clear");
         fiveDayCard.append(humShowFive);
       }
 
@@ -187,9 +187,9 @@ $("#searchCityBtn").on("click", function () {
 
 //event listener for click from search button
 $("#searchBtn").on("click", function () {
-  var x = $("#citySearch").val();
-  console.log(x);
-  if (x === "") {
+  var emptyCheck = $("#citySearch").val();
+  console.log(emptyCheck);
+  if (emptyCheck === "") {
     alert("Please enter a city");
   } else {
     var cityInput = $("#citySearch").val();
@@ -204,6 +204,8 @@ $("#searchBtn").on("click", function () {
     $("#forecastDisplay").empty();
 
     //save city to local storage and create a button with saved city name
+
+    //****NEED TO COMPARE WITH LOCAL STORAGE TO PREVENT DUP BUTTONS */
     localStorage.setItem(cityInput, cityInput);
     var savedCity = localStorage.getItem(cityInput);
     var savedContainer = $("#search");
@@ -324,7 +326,7 @@ $("#searchBtn").on("click", function () {
 
           //create card to nest below items inside of
           var fiveDayCard = $("<div>").addClass(
-            "card bg-dark rounded border-info text-white m-2 p-3"
+            "card bg-dark rounded border-info text-white m-2 p-3 col-lg-2"
           );
           forecast.append(fiveDayCard);
 
@@ -348,21 +350,21 @@ $("#searchBtn").on("click", function () {
           var tempShowFive = $("<h3>");
           tempShowFive
             .text("Temp: " + tempDataFive + " °F")
-            .addClass("h4 clear");
+            .addClass("h6 clear");
           fiveDayCard.append(tempShowFive);
 
           //display wind
           var windShowFive = $("<h3>");
           windShowFive
             .text("Wind: " + windDataFive + " MPH")
-            .addClass("h4 clear");
+            .addClass("h6 clear");
           fiveDayCard.append(windShowFive);
 
           //display humidity
           var humShowFive = $("<h3>");
           humShowFive
             .text("Humidity: " + humDataFive + "%")
-            .addClass("h4 clear");
+            .addClass("h6 clear");
           fiveDayCard.append(humShowFive);
         }
 
