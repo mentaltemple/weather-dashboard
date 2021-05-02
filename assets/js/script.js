@@ -22,7 +22,7 @@ for (var i = 0; i < localStorage.length; i++) {
 //-----------------SAVED BUTTON--------------------
 
 // click listener event on buttons from previously saved cities
-$("#searchCityBtn").on("click", function () {
+$(document).on("click", "#searchCityBtn", function () {
   //clear input field
   $("#citySearch").val("");
 
@@ -55,38 +55,42 @@ $("#searchCityBtn").on("click", function () {
     var lon = response2.coord.lon;
     var lat = response2.coord.lat;
 
-    //display city name
     var current = $("#currentDisplay");
+
+    var dayCard = $("<div>").addClass("card-body border mt-3");
+    current.append(dayCard);
+
+    //display city name
     var cityShow = $("<h1>");
     cityShow.text(cityName).addClass("h1");
-    current.append(cityShow);
+    dayCard.append(cityShow);
 
     //display date
     var dateShow = $("<h1>");
-    dateShow.text(dateData).addClass("h1");
-    current.append(dateShow);
+    dateShow.text(dateData).addClass("h3");
+    dayCard.append(dateShow);
 
     //display icon
     var iconShow = $("<img>");
     iconShow
       .attr("src", "http://openweathermap.org/img/wn/" + iconData + "@2x.png")
       .addClass("");
-    current.append(iconShow);
+    dayCard.append(iconShow);
 
     //display temp
     var tempShow = $("<h3>");
     tempShow.text("Temp: " + tempData + " °F").addClass("h3 clear");
-    current.append(tempShow);
+    dayCard.append(tempShow);
 
     //display wind
     var windShow = $("<h3>");
     windShow.text("Wind: " + windData + " MPH").addClass("h3 clear");
-    current.append(windShow);
+    dayCard.append(windShow);
 
     //display humidity
     var humShow = $("<h3>");
     humShow.text("Humidity: " + humData + "%").addClass("h3 clear");
-    current.append(humShow);
+    dayCard.append(humShow);
 
     console.log(response2);
 
@@ -111,7 +115,7 @@ $("#searchCityBtn").on("click", function () {
 
       var uviShow = $("<h3>");
       uviShow.text("UV Index: " + uviData).addClass("h3");
-      current.append(uviShow);
+      dayCard.append(uviShow);
 
       //if else (uvi < 2) = favorable \\ 3-5 yellow// 6,7 orange \\ 8-10 red \\ 11+ purple
 
@@ -137,13 +141,13 @@ $("#searchCityBtn").on("click", function () {
 
         //create card to nest below items inside of
         var fiveDayCard = $("<div>").addClass(
-          "card bg-dark rounded border-info text-white m-2 p-3 col-lg-2"
+          "card bg-dark rounded border-info text-white m-2 p-2 col-lg-2"
         );
         forecast.append(fiveDayCard);
 
         //display date
         var dateShowFive = $("<h1>");
-        dateShowFive.text(dateDataFive).addClass("h2");
+        dateShowFive.text(dateDataFive).addClass("h4");
         fiveDayCard.append(dateShowFive);
 
         //display icon
@@ -188,7 +192,7 @@ $("#searchCityBtn").on("click", function () {
 //event listener for click from search button
 $("#searchBtn").on("click", function () {
   var emptyCheck = $("#citySearch").val();
-  console.log(emptyCheck);
+
   if (emptyCheck === "") {
     alert("Please enter a city");
   } else {
@@ -244,38 +248,45 @@ $("#searchBtn").on("click", function () {
 
       //display current weather data with dynamically generated elements
 
-      //display city name
+      //select the currentDisplay section
       var current = $("#currentDisplay");
+
+      //create card for current display
+      var dayCard = $("<div>").addClass("card-body border mt-3");
+      current.append(dayCard);
+
+      //display city name
+
       var cityShow = $("<h1>");
       cityShow.text(cityName).addClass("h1");
-      current.append(cityShow);
+      dayCard.append(cityShow);
 
       //display date
       var dateShow = $("<h1>");
-      dateShow.text(dateData).addClass("h1");
-      current.append(dateShow);
+      dateShow.text(dateData).addClass("h3");
+      dayCard.append(dateShow);
 
       //display icon
       var iconShow = $("<img>");
       iconShow
         .attr("src", "http://openweathermap.org/img/wn/" + iconData + "@2x.png")
         .addClass("");
-      current.append(iconShow);
+      dayCard.append(iconShow);
 
       //display temp
       var tempShow = $("<h3>");
       tempShow.text("Temp: " + tempData + " °F").addClass("h3 clear");
-      current.append(tempShow);
+      dayCard.append(tempShow);
 
       //display wind
       var windShow = $("<h3>");
       windShow.text("Wind: " + windData + " MPH").addClass("h3 clear");
-      current.append(windShow);
+      dayCard.append(windShow);
 
       //display humidity
       var humShow = $("<h3>");
       humShow.text("Humidity: " + humData + "%").addClass("h3 clear");
-      current.append(humShow);
+      dayCard.append(humShow);
 
       //display UV index (color)
 
@@ -299,10 +310,20 @@ $("#searchBtn").on("click", function () {
         var uviData = responseOneCall.daily[0].uvi;
 
         var uviShow = $("<h3>");
-        uviShow.text("UV Index: " + uviData).addClass("h3");
-        current.append(uviShow);
+        uviShow.text("UV Index: " + uviData).addClass("h3 border text-white");
 
-        //if else (uvi < 2) = favorable \\ 3-5 yellow// 6,7 orange \\ 8-10 red \\ 11+ purple
+        // if (uviData <= 2) {
+        //   uviShow.addClass("bg-success");
+        // } else if (uviData > 2 || uviData < 6) {
+        //   uviShow.addClass("bg-warning");
+        // } else if (uviData >=6 || uviData <= 7 ) {
+        //   uviShow.addClass("bg-orange");
+        //if else uvi < 2 = favorable
+        // 3-5 yellow
+        // 6,7 orange
+        // 8-10 red
+        // 11+ purple
+        dayCard.append(uviShow);
 
         //------------------5 day---------------------
         var daily = responseOneCall.daily;
@@ -326,13 +347,13 @@ $("#searchBtn").on("click", function () {
 
           //create card to nest below items inside of
           var fiveDayCard = $("<div>").addClass(
-            "card bg-dark rounded border-info text-white m-2 p-3 col-lg-2"
+            "card bg-dark rounded border-info text-white m-2 p-2 col-lg-2"
           );
           forecast.append(fiveDayCard);
 
           //display date
           var dateShowFive = $("<h1>");
-          dateShowFive.text(dateDataFive).addClass("h2");
+          dateShowFive.text(dateDataFive).addClass("h4");
           fiveDayCard.append(dateShowFive);
 
           //display icon
