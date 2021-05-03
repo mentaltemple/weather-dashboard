@@ -54,8 +54,8 @@ $("#searchBtn").on("click", function () {
       var cityName = response.name;
       var dateData = moment().format("l");
       var iconData = response.weather[0].icon;
-      var tempData = response.main.temp;
-      var windData = response.wind.speed;
+      var tempData = Math.floor(response.main.temp);
+      var windData = Math.floor(response.wind.speed);
       var humData = response.main.humidity;
       var lon = response.coord.lon;
       var lat = response.coord.lat;
@@ -104,11 +104,12 @@ $("#searchBtn").on("click", function () {
       humShow.text("Humidity: " + humData + "%").addClass("h3 clear");
       dayCard.append(humShow);
 
-      //save city to local storage and create a button with saved city name
+      //save city to local storage
 
       //****NEED TO COMPARE WITH LOCAL STORAGE TO PREVENT DUP BUTTONS */
       localStorage.setItem(cityName, cityName);
-      var savedCity = localStorage.getItem(cityInput);
+
+      //create a button with saved city name
       var savedContainer = $("#search");
       var savedCityBut = $("<button>");
       savedCityBut
@@ -168,8 +169,8 @@ $("#searchBtn").on("click", function () {
         for (var i = 0; i < dailySliced.length; i++) {
           var dateDataFive = moment.unix(dailySliced[i].dt).format("l");
           var iconDataFive = dailySliced[i].weather[0].icon;
-          var tempDataFive = dailySliced[i].temp.max;
-          var windDataFive = dailySliced[i].wind_speed;
+          var tempDataFive = Math.floor(dailySliced[i].temp.max);
+          var windDataFive = Math.floor(dailySliced[i].wind_speed);
           var humDataFive = dailySliced[i].humidity;
           var forecast = $("#forecastDisplay");
 
@@ -252,8 +253,8 @@ $(document).on("click", "#searchCityBtn", function () {
     var cityName = response2.name;
     var dateData = moment().format("l");
     var iconData = response2.weather[0].icon;
-    var tempData = response2.main.temp;
-    var windData = response2.wind.speed;
+    var tempData = Math.floor(response2.main.temp);
+    var windData = Math.floor(response2.wind.speed);
     var humData = response2.main.humidity;
     var lon = response2.coord.lon;
     var lat = response2.coord.lat;
@@ -345,8 +346,8 @@ $(document).on("click", "#searchCityBtn", function () {
       for (var i = 0; i < dailySliced.length; i++) {
         var dateDataFive = moment.unix(dailySliced[i].dt).format("l");
         var iconDataFive = dailySliced[i].weather[0].icon;
-        var tempDataFive = dailySliced[i].temp.max;
-        var windDataFive = dailySliced[i].wind_speed;
+        var tempDataFive = Math.floor(dailySliced[i].temp.max);
+        var windDataFive = Math.floor(dailySliced[i].wind_speed);
         var humDataFive = dailySliced[i].humidity;
         var forecast = $("#forecastDisplay");
 
