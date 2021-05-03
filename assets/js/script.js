@@ -99,7 +99,7 @@ $("#searchBtn").on("click", function () {
         iconShow
           .attr(
             "src",
-            "http://openweathermap.org/img/wn/" + iconData + "@2x.png"
+            "https://openweathermap.org/img/wn/" + iconData + "@2x.png"
           )
           .addClass("");
         dayCard.append(iconShow);
