@@ -304,7 +304,7 @@ $("#searchBtn").on("click", function () {
       //save city to local storage and create a button with saved city name
 
       //****NEED TO COMPARE WITH LOCAL STORAGE TO PREVENT DUP BUTTONS */
-      localStorage.setItem(cityInput, cityInput);
+      localStorage.setItem(cityName, cityName);
       var savedCity = localStorage.getItem(cityInput);
       var savedContainer = $("#search");
       var savedCityBut = $("<button>");
