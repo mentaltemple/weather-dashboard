@@ -33,16 +33,28 @@
     </header>
     <main class="container col-lg-12">
       <div class="row">
-        <aside id="search" class="col-lg-3 container">
-          <!-- header -->
-          <h2 class="row h2 justify-content-center">Search for a city</h2>
-          <!-- text input -->
-          <input id="citySearch" type="text" class="form-control mb-3" />
-          <!-- button -->
-          <div class="border-bottom border-secondary mb-3">
-            <button id="searchBtn" class="btn btn-success col-12 mb-3">
-              Search
-            </button>
+        <aside class="col-lg-3 container">
+          <div>
+            <!-- header -->
+            <h2 class="row h2 justify-content-center"></h2>
+            <!-- text input -->
+            <input
+              id="citySearch"
+              type="text"
+              class="form-control mb-3"
+              placeholder="Enter city"
+            />
+            <!-- button -->
+            <div class="border-bottom border-secondary mb-3">
+              <button
+                id="searchBtn"
+                class="btn btn-success col-12 mb-3"
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+            <div id="search"></div>
           </div>
         </aside>
         <div class="container col-lg-9">
