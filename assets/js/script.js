@@ -301,8 +301,6 @@ $("#searchBtn").on("click", function () {
       humShow.text("Humidity: " + humData + "%").addClass("h3 clear");
       dayCard.append(humShow);
 
-      //display UV index (color)
-
       //save city to local storage and create a button with saved city name
 
       //****NEED TO COMPARE WITH LOCAL STORAGE TO PREVENT DUP BUTTONS */
@@ -341,6 +339,7 @@ $("#searchBtn").on("click", function () {
           .text("UV Index: " + uviData)
           .addClass("h3 border rounded text-white fit-content p-2");
 
+        //display UV index (color)
         if (uviData <= 2) {
           uviShow.addClass("bg-success");
         } else if (uviData >= 3 && uviData < 6) {
