@@ -121,7 +121,7 @@ $(document).on("click", "#searchCityBtn", function () {
       if (uviData <= 2) {
         uviShow.addClass("bg-success");
       } else if (uviData >= 3 && uviData < 6) {
-        uviShow.addClass("bg-warning");
+        uviShow.addClass("bg-yellow text-dark");
       } else if (uviData >= 6 && uviData < 8) {
         uviShow.addClass("bg-orange");
       } else if (uviData >= 8 && uviData < 11) {
@@ -200,7 +200,9 @@ $(document).on("click", "#searchCityBtn", function () {
   });
 });
 
+//____________________________________________________________________
 //----------------------SEARCH BUTTON----------------------------------
+//____________________________________________________________________
 
 //event listener for click from search button
 $("#searchBtn").on("click", function () {
@@ -220,20 +222,6 @@ $("#searchBtn").on("click", function () {
     $("#currentDisplay").empty();
     $("#forecastDisplay").empty();
 
-    //save city to local storage and create a button with saved city name
-
-    //****NEED TO COMPARE WITH LOCAL STORAGE TO PREVENT DUP BUTTONS */
-    localStorage.setItem(cityInput, cityInput);
-    var savedCity = localStorage.getItem(cityInput);
-    var savedContainer = $("#search");
-    var savedCityBut = $("<button>");
-    savedCityBut
-      .text(savedCity)
-      .addClass("btn btn-secondary col-12 mb-3")
-      .attr("id", "searchCityBtn");
-    // .setAttr();
-    savedContainer.append(savedCityBut);
-
     //create a variable that combines api url with city + key
     var weatherKey = "5255530bf1f1204d64609824d51b20e5";
     var requestUrl = [
@@ -248,6 +236,18 @@ $("#searchBtn").on("click", function () {
       method: "GET",
     }).then(function (response) {
       console.log(response);
+
+      var responseBoolean = JSON.stringify(typeof response);
+      console.log(responseBoolean);
+
+      // var objectCompare = "object";
+
+      // if (responseBoolean === objectCompare) {
+      //   prompt("WINNER");
+      // } else {
+      //   alert("YOU SUCK");
+      // }
+
       //parse the object to glean current weather and location data
       var cityName = response.name;
       var dateData = moment().format("l");
@@ -303,6 +303,20 @@ $("#searchBtn").on("click", function () {
 
       //display UV index (color)
 
+      //save city to local storage and create a button with saved city name
+
+      //****NEED TO COMPARE WITH LOCAL STORAGE TO PREVENT DUP BUTTONS */
+      localStorage.setItem(cityInput, cityInput);
+      var savedCity = localStorage.getItem(cityInput);
+      var savedContainer = $("#search");
+      var savedCityBut = $("<button>");
+      savedCityBut
+        .text(cityName)
+        .addClass("btn btn-secondary col-12 mb-3")
+        .attr("id", "searchCityBtn");
+      // .setAttr();
+      savedContainer.append(savedCityBut);
+
       //create a variable that combines 5day api url with city + key
       var requestUrlOneCall = [
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -330,7 +344,7 @@ $("#searchBtn").on("click", function () {
         if (uviData <= 2) {
           uviShow.addClass("bg-success");
         } else if (uviData >= 3 && uviData < 6) {
-          uviShow.addClass("bg-warning");
+          uviShow.addClass("bg-yellow text-dark");
         } else if (uviData >= 6 && uviData < 8) {
           uviShow.addClass("bg-orange");
         } else if (uviData >= 8 && uviData < 11) {
