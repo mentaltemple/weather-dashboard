@@ -53,7 +53,7 @@ $("#searchBtn").on("click", function () {
       console.log(response);
 
       var check1 = response.hasOwnProperty("name"); // => true
-      var check2 = JSON.stringify(response);
+      var check2 = response.visibility;
       var check3 = "undefined";
       var check4 = check2 == check3;
 
@@ -62,7 +62,7 @@ $("#searchBtn").on("click", function () {
       console.log(check3);
       console.log(check4);
 
-      if (check1 === true) {
+      if (check2 > 0.1) {
         //parse the object to glean current weather and location data
         var cityName = response.name;
         var dateData = moment().format("l");

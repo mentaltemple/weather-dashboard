@@ -19,10 +19,8 @@ header {
   width: fit-content;
 }
 
-/* media query*/
-/* @media screen and (max-width:600 ) {
-  #headtext{
-
+@media screen and (max-width: 376px) {
+  #headText {
+    font-size: 2rem;
   }
-
-} */
+}
