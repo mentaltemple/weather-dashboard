@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./assets/css/reset.css" />
+
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
@@ -26,13 +27,15 @@
   <body>
     <!-- create header -->
     <header class="container col-12">
-      <h1 class="row h1 justify-content-center p-3">Weather Dashboard</h1>
+      <h1 id="headText" class="h1 row justify-content-center p-3">
+        Weather Dashboard
+      </h1>
     </header>
     <main class="container col-lg-12">
       <div class="row">
         <aside id="search" class="col-lg-3 container">
           <!-- header -->
-          <h2 class="h2">Search for a city</h2>
+          <h2 class="row h2 justify-content-center">Search for a city</h2>
           <!-- text input -->
           <input id="citySearch" type="text" class="form-control mb-3" />
           <!-- button -->

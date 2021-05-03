@@ -18,3 +18,11 @@ header {
 .fit-content {
   width: fit-content;
 }
+
+/* media query*/
+/* @media screen and (max-width:600 ) {
+  #headtext{
+
+  }
+
+} */
