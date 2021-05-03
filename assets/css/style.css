@@ -3,8 +3,16 @@
   font-family: "Noto Sans", sans-serif;
 }
 header {
-  background-color: rgb(96, 187, 248);
+  /* background-color: rgb(96, 187, 248); */
+  background: rgb(235, 129, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(235, 129, 0, 1) 0%,
+    rgba(9, 75, 121, 1) 54%,
+    rgba(0, 212, 255, 1) 100%
+  );
   height: 5rem;
+  color: whitesmoke;
 }
 
 .bg-orange {
