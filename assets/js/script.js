@@ -351,7 +351,7 @@ $(document).on("click", "#searchCityBtn", function () {
 
         //create card to nest 5 day elements
         var fiveDayCard = $("<div>").addClass(
-          "card bg-dark rounded border-info text-white m-2 p-2 col-lg-2"
+          "card bg-card rounded border-info text-white m-2 p-2 col-lg-2"
         );
         forecast.append(fiveDayCard);
 
