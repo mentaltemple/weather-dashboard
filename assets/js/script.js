@@ -111,21 +111,11 @@ $("#searchBtn").on("click", function () {
 
       //save city to local storage
 
-      //****NEED TO COMPARE WITH LOCAL STORAGE TO PREVENT DUP BUTTONS */
       localStorage.setItem(cityName, cityName);
-
+      //call function to generate buttons
       renderButtons();
 
-      //create a button with saved city name
-      // var savedContainer = $("#search");
-      // var savedCityBut = $("<button>");
-      // savedCityBut
-      //   .text(cityName)
-      //   .addClass("btn btn-secondary col-12 mb-3")
-      //   .attr("id", "searchCityBtn");
-
-      savedContainer.append(savedCityBut);
-
+      //------------------5 DAY FORECAST & UVI DATA---------------------
       //create a variable that combines 5day api url with city + key
       var requestUrlOneCall = [
         "https://api.openweathermap.org/data/2.5/onecall?lat=" +
@@ -165,7 +155,6 @@ $("#searchBtn").on("click", function () {
 
         dayCard.append(uviShow);
 
-        //------------------5 DAY FORECAST---------------------
         //store forecast data in variable, currently 8 days
         var daily = responseOneCall.daily;
 
@@ -183,7 +172,7 @@ $("#searchBtn").on("click", function () {
 
           //create card to nest below 5 day elements
           var fiveDayCard = $("<div>").addClass(
-            "card bg-dark rounded border-info text-white m-2 p-2 col-lg-2"
+            "card bg-card rounded border-info text-white m-2 p-2 col-lg-2"
           );
           forecast.append(fiveDayCard);
 
